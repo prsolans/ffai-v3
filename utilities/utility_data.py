@@ -1,5 +1,6 @@
 import sqlite3
 from sqlite3 import Error
+import re
 
 def create_connection():
     """ create a database connection to a database that resides
@@ -25,7 +26,10 @@ def create_tables():
                   (player_id INTEGER PRIMARY KEY, name text, age integer, experience integer, position text, team text)''')
         c.execute('DROP TABLE IF EXISTS contracts')
         c.execute('''CREATE TABLE IF NOT EXISTS contracts
-                  (contract_id INTEGER PRIMARY KEY, player_id integer, average_salary text, contract_length text, contract_terms text, guaranteed text, expiration text)''')
+                  (contract_id INTEGER PRIMARY KEY, player_id integer, average_salary integer, contract_length integer, contract_terms integer, guaranteed integer, expiration text)''')
+        c.execute('DROP TABLE IF EXISTS fantasy_stats')
+        c.execute('''CREATE TABLE IF NOT EXISTS fantasy_stats
+                  (contract_id INTEGER PRIMARY KEY, player_id integer, source text, year text, points integer, url text)''')
         conn.commit()
         print('Tables created...')
     except Error as e:
@@ -46,3 +50,16 @@ def insert_data(data):
         print(e)
     finally:
         conn.close()
+
+def convert_to_integer(input):
+    """ take a string value - as for a dollar amount of year amount
+        and convert to an integer
+    """
+    try:
+        intValue = re.sub('[^0-9]','', input)
+        if len(intValue) < 1:
+            intValue = '0'    
+        intValue = int(intValue)
+        return intValue
+    except Error as e:
+        print(e)
