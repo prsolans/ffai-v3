@@ -2,9 +2,9 @@ import sqlite3
 from sqlite3 import Error
 from bs4 import BeautifulSoup
 
-from utility_data import insert_data
-from utility_scrape import simple_get
-from utility_players import find_player_id_by_name
+from utilities.utility_data import insert_data
+from utilities.utility_scrape import simple_get
+from utilities.utility_players import find_player_id_by_name
 
 
 def get_player_data():
@@ -81,7 +81,6 @@ def get_player_data():
         # testUrl = 'https://www.spotrac.com/nfl/tennessee-titans/contracts/'
         # playerData = getContractData(testUrl)
         # END FOR TESTING PURPOSES
-
 
         # """## Cycle through list of Contract pages and get back all line items"""
 

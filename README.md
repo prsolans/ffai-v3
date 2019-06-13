@@ -1,15 +1,13 @@
-README.md
-
 #FFAI v3
 
 Our goal is to build a superior algorithm for comparing the relative fantasy football value of NFL players.
 
 * ffai_setup.py - This file initiates the process
 
-### Setup
+### Source
 #### We should have one for each data source
-* setup_players.py - Scrapes and inserts player and contract data
-* setup_teams.py - Scrapes and inserts team data
+* source_players.py - Scrapes and inserts player and contract data
+* source_teams.py - Scrapes and inserts team data
 
 ### Utilities
 #### These hold the functions we use to build the DB and to leverage the data

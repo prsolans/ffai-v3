@@ -2,8 +2,8 @@ import sqlite3
 from sqlite3 import Error
 from bs4 import BeautifulSoup
 
-from utility_data import insert_data
-from utility_scrape import simple_get
+from utilities.utility_data import insert_data
+from utilities.utility_scrape import simple_get
 
 
 def get_team_data():
