@@ -7,7 +7,6 @@ def create_connection():
     """
     try:
         conn = sqlite3.connect('ffai_1.db')
-        print(sqlite3.version)
         return(conn)
     except Error as e:
         print(e)
@@ -39,7 +38,7 @@ def insert_data(data):
         data: single INSERT statement
     """
     try:
-        conn = sqlite3.connect('ffai_1.db')
+        conn = create_connection()
         c = conn.cursor()
         c.execute(data)
         conn.commit()        

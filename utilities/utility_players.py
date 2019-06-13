@@ -1,12 +1,13 @@
 import sqlite3
 from sqlite3 import Error
 
+from utilities.utility_data import create_connection
+
 def find_player_id_by_name(playerName):
-    """ create a database connection to a database that resides
-        in the memory
+    """ find the player_id for an existing player in our database
     """
     try:
-        conn = sqlite3.connect('ffai_1.db')
+        conn = create_connection()
         c = conn.cursor()
         # playerName = "Julio Jones"
         player = c.execute('SELECT * from players WHERE name ="'+ playerName +'"')        
@@ -19,5 +20,6 @@ def find_player_id_by_name(playerName):
     finally:
         conn.close()
 
+# DEBUGGING
 # player_id = find_player_id_by_name("Dion Lewis")
 # print(player_id)
