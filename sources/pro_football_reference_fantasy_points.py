@@ -22,13 +22,13 @@ def get_pfr_fantasy_data():
         for tr in listItems:
           player = {}
 
-          print(tr)
-
           playerLink = tr.find("td").find("a")
           name = playerLink.text
           url = playerLink['href']
           points = tr.find("td", {"data-stat":"fantasy_points"}).text
 
+          ## THERE IS A GOOD SOURCE FOR CORE ANNUAL STATS
+          ## THERE ARE 20+ more fields we can harvest from here
           player['id'] = find_player_id_by_name(name)
           player['points'] = convert_to_integer(points)
           player['url'] = url
