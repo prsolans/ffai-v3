@@ -35,8 +35,8 @@ def create_tables():
         conn.close()
 
 def insert_data(data):
-    """ create a database connection to a database that resides
-        in the memory
+    """ create a database connection to a database and execute a statement
+        data: single INSERT statement
     """
     try:
         conn = sqlite3.connect('ffai_1.db')
