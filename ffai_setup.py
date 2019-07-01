@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 import os
 import logging
 
@@ -18,6 +18,10 @@ def index():
     # get_nfl_com_data()
     # get_pfr_fantasy_data()
     return ('hey buddy...')
+
+@app.route("/player")
+def player():
+    return render_template('player.html')
 
 if __name__ == '__main__':
     app.run()
