@@ -12,12 +12,12 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    create_tables()
-    get_team_data()
+    # create_tables()
+    # get_team_data()
     # get_player_data()
     # get_nfl_com_data()
     # get_pfr_fantasy_data()
-    return ('hey buddy...')
+    return render_template('index.html')
 
 @app.route("/player")
 def player():
