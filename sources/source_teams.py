@@ -21,14 +21,14 @@ def get_team_data():
 
         teamList = []
 
-        for i in range(0, numOfTeams): 
+        for i in range(0, numOfTeams):
           team = teamlistTable[i].text
-          
+
           words = team.split()
           name = words[-1]
-          city = team.rsplit(' ', 1)[0]  
+          city = team.rsplit(' ', 1)[0]
           teamData = [city, name]
-          
+
           teamList.append(teamData)
 
         """## Create team INSERT statements
@@ -36,6 +36,7 @@ def get_team_data():
         for team in teamList:
 
             item = 'INSERT into teams (city, name, abbreviation) VALUES ("'+ team[0] +'", "'+ team[1] +'", "XXX"); '
+            print(item)
             insert_data(item)
 
         print('Team data inserted...')
