@@ -1,12 +1,10 @@
 {% extends 'base.html' %}
 
 {% block container %}
-{% if name %}
-  <h1>Hello {{ name }}!</h1>
+{% if playerid %}
+  <h1>This is the FFAI page for PlayerId: {{ playerid }}!</h1>
 {% else %}
-  <h1>Hello Mark Bond!</h1>
-  <p>This may not look like much, but the path to getting this deployed was long and winding.</p>
-  <p>Now that this is in place, I think we can start making some really fast progress. We have a rock solid foundation, which is going to be incredibly helpful over the next six weeks. </p>
+  <h1>Error: You need to enter a playerid</h1>
 {% endif %}
 {% endblock %}
 

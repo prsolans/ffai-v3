@@ -10,7 +10,7 @@ from utilities.utility_data import create_tables
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route('/')
 def index():
     # create_tables()
     # get_team_data()
@@ -19,9 +19,17 @@ def index():
     # get_pfr_fantasy_data()
     return render_template('index.html')
 
-@app.route("/player")
-def player():
-    return render_template('player.html')
+@app.route('/player/<playerid>')
+def player(playerid=''):
+    return render_template('player.html', playerid=playerid)
+
+@app.route('/players')
+def players():
+    return render_template('players.html')
+
+@app.route('/teams')
+def teams():
+    return render_template('teams.html')
 
 if __name__ == '__main__':
     app.run()
