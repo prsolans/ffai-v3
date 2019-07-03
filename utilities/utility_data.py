@@ -12,11 +12,11 @@ def create_postgresql_connection():
                                     database = "ffai")
         cursor = connection.cursor()
         # Print PostgreSQL Connection properties
-        print ( connection.get_dsn_parameters(),"\n")
+        # print ( connection.get_dsn_parameters(),"\n")
         # Print PostgreSQL version
         cursor.execute("SELECT version();")
-        record = cursor.fetchone()
-        print("You are connected to - ", record,"\n")
+        # record = cursor.fetchone()
+        # print("You are connected to - ", record,"\n")
         return(cursor)
     except (Exception, psycopg2.Error) as error :
         print ("Error while connecting to PostgreSQL", error)
@@ -40,15 +40,75 @@ def get_teams():
             #     connection.close()
             #     print("PostgreSQL connection is closed")
 
-def get_team(id):
+def get_team_by_id(id):
     try:
         cursor = create_postgresql_connection()
-        cursor.execute("SELECT * from teams WHERE team_id="+id+";")
+        cursor.execute("SELECT * from teams WHERE team_id="+str(id)+";")
         team = cursor.fetchone()
+        # print(team)
+        return(team)
+    except (Exception, psycopg2.Error) as error :
+        print ("Error while connecting to PostgreSQL", error)
+
+def get_team_by_name(name):
+    try:
+        cursor = create_postgresql_connection()
+
+        cursor.execute("SELECT * from teams WHERE name='"+name+"';")
+        team = cursor.fetchone()
+
         print(team)
         return(team)
     except (Exception, psycopg2.Error) as error :
         print ("Error while connecting to PostgreSQL", error)
+
+
+def get_players_by_team(teamid):
+    try:
+        cursor = create_postgresql_connection()
+
+        cursor.execute("SELECT * from players WHERE team_id='"+teamid+"';")
+        players = cursor.fetchall()
+
+        return(players)
+    except (Exception, psycopg2.Error) as error :
+        print ("Error while connecting to PostgreSQL", error)
+
+
+def get_player_by_id(playerid):
+    try:
+        cursor = create_postgresql_connection()
+
+        cursor.execute("SELECT * from players WHERE player_id='"+playerid+"';")
+        player = cursor.fetchone()
+
+        return(player)
+    except (Exception, psycopg2.Error) as error :
+        print ("Error while connecting to PostgreSQL", error)
+
+
+def get_player_by_name(playername):
+    try:
+        cursor = create_postgresql_connection()
+
+        cursor.execute("SELECT * from players WHERE name='"+playername+"' AND position='QB';")
+        player = cursor.fetchone()
+        print(player)
+        return(player)
+    except (Exception, psycopg2.Error) as error :
+        print ("Error while connecting to PostgreSQL", error)
+
+def get_player_rankings(playerid):
+    try:
+        cursor = create_postgresql_connection()
+
+        cursor.execute("SELECT * from rankings WHERE player_id='"+playerid+"';")
+        rankings = cursor.fetchall()
+        print(rankings)
+        return(rankings)
+    except (Exception, psycopg2.Error) as error :
+        print ("Error while connecting to PostgreSQL", error)
+
 
 def create_connection():
     """ create a database connection to a database that resides

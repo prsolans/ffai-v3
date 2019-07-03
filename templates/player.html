@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 
 {% block container %}
-{% if playerid %}
-  <h1>This is the FFAI page for PlayerId: {{ playerid }}!</h1>
-{% else %}
-  <h1>Error: You need to enter a playerid</h1>
-{% endif %}
+  <h1>{{player[1]}}</h1>
+  <h2>Team: <a href="/team/{{team[0]}}">{{team[1]}} {{team[2]}}</a></h2>
+  <h2>Position: {{player[4]}}</h2>
+  <h2>Age: {{player[2]}}</h2>
+  <h2>Experience: {{player[3]}}</h2>
+  <ul>{% for item in rankings -%}
+    <li>{{item[1]}} - {{item[2]}}</li>
+  {%- endfor %}
+  </ul>
 {% endblock %}
 
 

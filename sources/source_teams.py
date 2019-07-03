@@ -1,10 +1,10 @@
-import sqlite3
-from sqlite3 import Error
+import csv
+# import sqlite3
+# from sqlite3 import Error
 from bs4 import BeautifulSoup
 
-from utilities.utility_data import insert_data
+# from utilities.utility_data import insert_data
 from utilities.utility_scrape import simple_get
-
 
 def get_team_data():
 
@@ -21,6 +21,8 @@ def get_team_data():
 
         teamList = []
 
+        print(numOfTeams)
+
         for i in range(0, numOfTeams):
           team = teamlistTable[i].text
 
@@ -31,15 +33,26 @@ def get_team_data():
 
           teamList.append(teamData)
 
-        """## Create team INSERT statements
-        """
-        for team in teamList:
+        with open('csv/team.csv', 'w') as csvfile:
+          filewriter = csv.writer(csvfile, delimiter=',',
+                                  quotechar='|', quoting=csv.QUOTE_MINIMAL)
+          for team in teamList:
+            city = team[0]
+            name = team[1]
+            # item = '[("'+ city +'", "'+ name +'", "XXX")]'
+            # print(item)
+            filewriter.writerow([city, name, 'XXX'])
 
-            item = 'INSERT into teams (city, name, abbreviation) VALUES ("'+ team[0] +'", "'+ team[1] +'", "XXX"); '
-            print(item)
-            insert_data(item)
+        # """## Create team INSERT statements
+        # """
+        # for team in teamList:
+
+        #     item = 'INSERT into teams (city, name, abbreviation) VALUES ("'+ team[0] +'", "'+ team[1] +'", "XXX"); '
+        #     print(item)
+        #     insert_data(item)
 
         print('Team data inserted...')
-    except Error as e:
+    except Exception as e:
         print(e)
 
+get_team_data()

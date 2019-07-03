@@ -4,7 +4,7 @@
   <h1>Teams</h1>
   <ul>
   {% for item in teams -%}
-    <li><a href="team/{{item[0]}}">{{ item[2] }}</a></li>
+    <li><a href="team/{{item[0]}}">{{ item[1] }} {{ item[2] }}</a></li>
   {%- endfor %}
 </ul>
 {% endblock %}

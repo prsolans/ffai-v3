@@ -2,6 +2,11 @@
 
 {% block container %}
   <h1>{{team[1]}} {{team[2]}}</h1>
+
+  {% for item in players -%}
+
+    <li><a href="/player/{{item[0]}}">{{ item[1] }}, {{item[4]}}</a></li>
+  {%- endfor %}
 {% endblock %}
 
 
