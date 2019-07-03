@@ -2,14 +2,33 @@ import sqlite3
 from sqlite3 import Error
 import re
 import psycopg2
+import os
+import urllib.parse as urlparse
+
 
 def create_postgresql_connection():
     try:
-        connection = psycopg2.connect(user = "prsolans",
-                                    password = "",
-                                    host = "127.0.0.1",
-                                    port = "5432",
-                                    database = "ffai")
+
+        url = urlparse.urlparse(os.environ['DATABASE_URL'])
+        dbname = url.path[1:]
+        user = url.username
+        password = url.password
+        host = url.hostname
+        port = url.port
+
+        connection = psycopg2.connect(
+            dbname=dbname,
+            user=user,
+            password=password,
+            host=host,
+            port=port
+            )
+
+        # connection = psycopg2.connect(user = "prsolans",
+        #                             password = "",
+        #                             host = "127.0.0.1",
+        #                             port = "5432",
+        #                             database = "ffai")
         cursor = connection.cursor()
         # Print PostgreSQL Connection properties
         # print ( connection.get_dsn_parameters(),"\n")

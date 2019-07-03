@@ -91,6 +91,7 @@ def get_player_data():
         # """## Cycle through list of Contract pages and get back all line items"""
 
         playerData = []
+        print('b')
 
         for contractPage in contractPageLinks:
           playerData.extend(getContractData(contractPage))
@@ -140,4 +141,6 @@ def get_player_data():
     except Exception as e:
         print(e)
 
+print('a')
 get_player_data()
+print('z')
