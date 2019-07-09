@@ -1,9 +1,11 @@
+# DEPRECATED
+# Used to grab players and the contract data
+# Replaced by PFR data
+
 import csv
-# import sqlite3
-# from sqlite3 import Error
 from bs4 import BeautifulSoup
 
-from utilities.utility_data import insert_data, convert_to_integer, get_team_by_name
+from utilities.utility_data import convert_to_integer, get_team_by_name
 from utilities.utility_scrape import simple_get
 from utilities.utility_players import find_player_id_by_name
 

@@ -6,9 +6,21 @@
   <h2>Position: {{player[4]}}</h2>
   <h2>Age: {{player[2]}}</h2>
   <h2>Experience: {{player[3]}}</h2>
+  <h3>Rankings</h3>
   <ul>{% for item in rankings -%}
     <li>{{item[1]}} - {{item[2]}}</li>
   {%- endfor %}
+  </ul>
+  <h3>Fantasy Stats</h3>
+  <ul>{% for item in fantasy_stats -%}
+    <li><a href="http://fantasy.nfl.com{{item[5]}}" target="_blank">{{item[3]}} ({{item[2]}}) - {{item[4]}} pts</a></li>
+  {%- endfor %}
+  </ul>
+
+  <h4>GAME LOG</h4>
+  <ul>{% for item in game_log -%}
+    <li>{{item[3]}}, {{item[2]}}, {{item[4]}}</li>
+    {%- endfor %}
   </ul>
 {% endblock %}
 

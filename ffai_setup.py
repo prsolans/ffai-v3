@@ -7,7 +7,7 @@ import psycopg2
 # from sources.source_players import get_player_data
 # from sources.nflcom_fantasy_points import get_nfl_com_data
 # from sources.pro_football_reference_fantasy_points import get_pfr_fantasy_data
-from utilities.utility_data import create_postgresql_connection, get_teams, get_team_by_id, get_players_by_team, get_player_by_id, get_player_rankings
+from utilities.utility_data import create_postgresql_connection, get_teams, get_team_by_id, get_players_by_team, get_player_by_id, get_player_rankings, get_player_fantasy_stats, get_player_game_log
 
 app = Flask(__name__)
 
@@ -30,8 +30,9 @@ def player(playerid=''):
     player = get_player_by_id(playerid)
     team = get_team_by_id(player[5])
     rankings = get_player_rankings(playerid)
-
-    return render_template('player.html', player=player, team=team, rankings=rankings)
+    fantasy_stats = get_player_fantasy_stats(playerid)
+    game_log = get_player_game_log(playerid)
+    return render_template('player.html', player=player, team=team, rankings=rankings, fantasy_stats=fantasy_stats, game_log=game_log)
 
 @app.route('/teams')
 def teams():

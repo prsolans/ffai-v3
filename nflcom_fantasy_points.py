@@ -5,7 +5,7 @@ import csv
 
 from utilities.utility_scrape import simple_get
 from utilities.utility_players import find_player_id_by_name
-from utilities.utility_data import convert_to_integer, insert_data
+from utilities.utility_data import convert_to_integer, get_player_by_name
 
 def get_nfl_com_data():
 
@@ -22,27 +22,31 @@ def get_nfl_com_data():
 
         for tr in listItems:
           player = {}
-
           playerLink = tr.find("td", {"class":"playerNameAndInfo"}).find("a")
           name = playerLink.text
           url = playerLink['href']
           points = tr.find("td", {"class":"statTotal"}).text
-
-          player['id'] = find_player_id_by_name(name)
+          playerObject = get_player_by_name(name)
+          # print(player)
+          player['id'] = playerObject[0]
           player['points'] = convert_to_integer(points)
           player['url'] = url
-
           playerObjects.append(player)
 
-        print(playerObjects)
+        # print(playerObjects)
 
-        with open('persons.csv', 'wb') as csvfile:
+        with open('csv/nflcom_2018_fantasypts.csv', 'w') as csvfile:
           filewriter = csv.writer(csvfile, delimiter=',',
                                   quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
-        for player in playerObjects:
-          source = 'nfl'
-          year
+          for player in playerObjects:
+            source = 'nfl'
+            year = '2018'
+            player_id = player['id']
+            points = player['points']
+            url = player['url']
+            filewriter.writerow([player_id, source, year, points, url])
+
 
         # # This represents every player with an active contract in the NFL
         # for player in playerObjects:
@@ -53,5 +57,7 @@ def get_nfl_com_data():
 
         print('Data successfully inserted...')
 
-    except Error as e:
-        print(e)
+    except Exception as e:
+        print('get_nfl_com_data: ', e)
+
+get_nfl_com_data()

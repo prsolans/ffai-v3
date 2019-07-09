@@ -26,6 +26,7 @@ SET default_with_oids = false;
 DROP TABLE IF EXISTS public.rankings;
 DROP TABLE IF EXISTS public.players;
 DROP TABLE IF EXISTS public.teams;
+DROP TABLE IF EXISTS public.fantasy_stats;
 
 CREATE TABLE public.players (
     player_id integer NOT NULL,
@@ -190,3 +191,13 @@ ALTER TABLE ONLY public.rankings
 -- PostgreSQL database dump complete
 --
 
+CREATE TABLE "public"."fantasy_stats" (
+    "stat_id" serial,
+    "player_id" integer,
+    "source" text,
+    "year" integer,
+    "points" integer,
+    "url" text,
+    PRIMARY KEY ("stat_id"),
+    FOREIGN KEY ("player_id") REFERENCES "public"."players"("player_id")
+);

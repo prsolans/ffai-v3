@@ -9,13 +9,13 @@ def find_player_id_by_name(playerName):
     try:
         conn = create_connection()
         c = conn.cursor()
-        # playerName = "Julio Jones"
-        player = c.execute('SELECT * from players WHERE name ="'+ playerName +'"')        
-        rows = player.fetchall()
-        for row in rows:
-            return row[0]
-    
-    except Error as e:
+        # print(playerName)
+        player = c.execute('SELECT * from players WHERE name ="'+ playerName +'"')
+        row = player.fetchone()
+        print(row)
+        return(row)
+
+    except Exception as e:
         print(e)
     finally:
         conn.close()

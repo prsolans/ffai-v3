@@ -1,9 +1,8 @@
+# Original code used to create table of NFL teams
+
 import csv
-# import sqlite3
-# from sqlite3 import Error
 from bs4 import BeautifulSoup
 
-# from utilities.utility_data import insert_data
 from utilities.utility_scrape import simple_get
 
 def get_team_data():
